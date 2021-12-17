@@ -1,0 +1,202 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Cadastro / Universitario.br</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    ..
+    <div class="wrapper">
+      <!-- Formulário -->
+      <form action="" id="formulario" method="POST" name="formulario">
+        <legend>Cadastro Universitario.br</legend>
+        <div class="input-group">
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Insira seu nome"
+          />
+          <label id="label-nome-sucesso"></label>
+          <label id="label-nome-erro"></label>
+        </div>
+        <div class="input-group">
+          <label for="pontos">Pontos:</label>
+          <input type="text" id="pontos" placeholder="digite seus pontos" />
+          <label id="label-pontos-sucesso"></label>
+          <label id="label-pontos-erro"></label>
+        </div>
+        <div class="input-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" placeholder="Insira seu e-mail" />
+          <label id="label-email-sucesso"></label>
+          <label id="label-email-erro"></label>
+        </div>
+
+        <div class="input-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" placeholder="Insira a senha" />
+          <label id="label-senha-sucesso"></label>
+          <label id="label-senha-erro"></label>
+        </div>
+
+        <div class="colunas">
+          <div class="input-group">
+            <label for="nota">Nota</label>
+            <input type="text" id="nota" placeholder="Digite sua nota" />
+            <label id="label-nota-sucesso"></label>
+            <label id="label-nota-erro"></label>
+          </div>
+
+          <div class="input-group">
+            <label for="empresa">Empresa:</label>
+            <input type="text" id="empresa" placeholder="Nome da empresa" />
+            <label id="label-empresa-sucesso"></label>
+            <label id="label-empresa-erro"></label>
+          </div>
+        </div>
+        <div class="colunas">
+          <div class="input-group">
+            <label for="sexo">Sexo:</label>
+            <select name="sexo" id="sexo">
+              <option value="">informar...</option>
+              <option value="m">Masculino</option>
+              <option value="f">Feminino</option>
+              <option value="l">Lesbica</option>
+              <option value="g">Gay</option>
+              <option value="b">Bisexual</option>
+              <option value="nb">Não Binario</option>
+              <option value="bn">Binario</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="dataehora">Data e hora</label>
+            <input type="time" id="dataehora" />
+          </div>
+        </div>
+        <div class="footer">
+          <button type="button" class="botao" onclick="validar()">
+            Enviar
+          </button>
+        </div>
+      </form>
+
+      <script>
+        /* Função Validar */
+        function validar() {
+          // pegando o valor do nome pelos names
+
+          var nome = document.getElementById("nome");
+          var pontos = document.getElementById("pontos");
+          var email = document.getElementById("email");
+          var senha = document.getElementById("senha");
+          var nota = document.getElementById("nota");
+          var empresa = document.getElementById("empresa");
+          var sexo = document.getElementById("sexo");
+          var dataehora = document.getElementById("dataehora").checked;
+
+          // verificar se o nome está vazio
+          if (nome.value == "") {
+            document.getElementById("label-nome-erro").innerHTML ="Campo nome nao preenchido!";
+            nome.focus();
+            return event.preventDefault();
+          } else {
+            document.getElementById("label-nome-sucesso").innerHTML = "Campo nome preenchido!";
+            
+          }
+
+
+
+          if (pontos.value == "") {
+            document.getElementById("label-pontos-erro").innerHTML ="Por favor digite os pontos";
+            pontos.focus();
+            return event.preventDefault();
+          } else {
+            document.getElementById("label-pontos-sucesso").innerHTML = "Obrigado por preencher";
+            
+          }
+
+
+          if (email.value == "") {
+            document.getElementById("label-email-erro").innerHTML ="Campo E-mail nao preenchido";
+            email.focus();
+            return event.preventDefault();
+          } else {
+            document.getElementById("label-email-sucesso").innerHTML ="Campo email preenchido";
+            
+          }
+
+
+          if (senha.value == "") {
+            document.getElementById("label-senha-erro").innerHTML = "Digite a sua senha";
+            senha.focus();
+            return event.preventDefault();
+          }
+          else{
+            document.getElementById("label-senha-sucesso").innerHTML ="Campo Preenchido!"
+            
+          }
+
+
+          if (nota.value == "") {
+            document.getElementById("label-nota-erro").innerHTML ="Campo Nota nao preenchido";
+            nota.focus();
+            return event.preventDefault();
+          }
+          else{
+            document.getElementById("label-nota-sucesso").innerHTML ="Campo Nota preenchido!"
+           
+
+
+          }
+          if (empresa.value == "") {
+            document.getElementById("label-empresa-erro").innerHTML ="Preencha o campo Empresa";
+            empresa.focus();
+            return event.preventDefault();
+          }
+          else{
+            document.getElementById("label-empresa-sucesso").innerHTML= "Campo preenchido!"
+            
+
+
+          }
+          if (sexo.value == "") {
+            alert("Sexo não informado");
+            sexo.focus();
+            return;
+          }
+          alert("Formulário enviado!");
+          //aqui começa o exercicio 4
+          // envia o formulário
+          //formulario.submit();
+
+
+          function loadXMLDoc() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+              xmlhttp = new XMLHttpRequest();
+            } else {
+              // code for older browsers
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("email").innerHTML = this.responseText;
+              }
+            };
+            xmlhttp.open("GET", "xmlhttp_info.txt", true);
+            xmlhttp.send();
+          }
+        }
+      </script>
+    </div>
+  </body>
+</html>
